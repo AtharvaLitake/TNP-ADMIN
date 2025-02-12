@@ -7,9 +7,11 @@ loadFonts()
 import { createRouter, createWebHistory } from "vue-router";
 //component imports
 import AddCompany from './components/AddCompany.vue'
+import AddNotification from './components/AddNotification.vue'
 //router setup
 const routes = [
   { path: "/addcompany", name: "AddCompany", component: AddCompany },
+  { path: "/addnotification", name: "AddNotification", component: AddNotification },
 ];
 
 const router = createRouter({
