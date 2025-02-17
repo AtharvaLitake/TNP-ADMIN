@@ -9,11 +9,13 @@ import { createRouter, createWebHistory } from "vue-router";
 import AddCompany from './components/AddCompany.vue'
 import AddNotification from './components/AddNotification.vue'
 import LoginPage from './components/LoginPage.vue'
+import ViewRegisteredStudent from './components/ViewRegisteredStudent.vue'
 //router setup
 const routes = [
   { path: "/addcompany", name: "AddCompany", component: AddCompany },
   { path: "/addnotification", name: "AddNotification", component: AddNotification },
   { path: "/", name: "LoginPage", component: LoginPage },
+  {path:"/registeredstudent",name:"ViewRegisteredStudent",component:ViewRegisteredStudent}
 ];
 
 const router = createRouter({
