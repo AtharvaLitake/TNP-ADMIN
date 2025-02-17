@@ -1,4 +1,5 @@
 <template>
+  <nav-drawer></nav-drawer>
   <v-container class="px-15">
     <v-row class="d-flex justify center">
       <v-col cols="12" class="d-flex flex-column" align-self="center">
@@ -183,7 +184,11 @@
 </template>
 
 <script>
+import NavDrawer from "../BaseComponents/NavDrawer.vue";
 export default {
+  components:{
+    'nav-drawer':NavDrawer,
+  },
   data() {
     return {
       company_name: "",

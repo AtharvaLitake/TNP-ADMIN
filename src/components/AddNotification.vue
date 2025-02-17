@@ -1,4 +1,5 @@
 <template>
+  <nav-drawer></nav-drawer>
   <v-container class="px-15">
     <h1 class="text-h5 font-weight-bold text-primary mb-3">Send Notices</h1>
     <p class="text-justify text-h6" style="color: rgba(8, 30, 127, 0.6)">
@@ -42,7 +43,11 @@
 </template>
 
 <script>
+import NavDrawer from '../BaseComponents/NavDrawer.vue';
 export default {
+  components:{
+    'nav-drawer':NavDrawer
+  },
   data() {
     return {
       notification_title: "",
