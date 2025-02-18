@@ -13,9 +13,9 @@
                                     <h1 class="text-h5 font-weight-bold text-primary mb-1">Welcome Back</h1>
                                     <v-form @submit.prevent="loginform" class="pa-3 mt-3">
                                         <!-- Registration Number -->
-                                        <v-text-field v-model="Admin_Email" label="Admin Email"
-                                            class="mb-1 pa-1" placeholder="Enter your Admin Mail"
-                                            append-inner-icon="mdi-login" variant="underlined" color="primary"
+                                        <v-text-field v-model="Admin_Email" label="Admin Email" class="mb-1 pa-1"
+                                            placeholder="Enter your Admin Mail" append-inner-icon="mdi-login"
+                                            variant="underlined" color="primary"
                                             style="color:rgba(8, 30, 127)"></v-text-field>
 
                                         <!-- Password -->
@@ -25,7 +25,7 @@
                                             color="primary" style="color:rgba(8, 30, 127)"
                                             @click:append-inner="show2 = !show2"></v-text-field>
 
-                                        <v-btn class="mt-2 bg-primary" text="Login Now" type="submit" block to="/addcompany"></v-btn>
+                                        <v-btn class="mt-2 bg-primary" text="Login Now" type="submit" block :loading="loading"></v-btn>
                                     </v-form>
                                 </v-card>
                             </v-col>
@@ -44,6 +44,7 @@ import axios from 'axios';
 export default {
     data() {
         return {
+            loading:false,
             Admin_Email: null,
             admin_password: '',
             show2: false,
@@ -55,13 +56,18 @@ export default {
                 email: this.Admin_Email,
                 password: this.admin_password,
             }
-            axios.post('https://tnp-portal-backend-tpx5.onrender.com/api/v1/auth/admin/login', adminCredentials)
-            .then(response => {
-                console.log('Login successful:',response.data);
-            })
-            .catch(error => {
-                console.error('Login failed:',error);
-            })
+            this.loading=true
+            axios.post('https://tnp-portal-backend-tpx5.onrender.com/api/v1/admins/login', adminCredentials)
+                .then(response => {
+                    console.log('Login successful:', response.data);
+                    localStorage.setItem('adminAuth', response.data.token)
+                    this.$router.push('/addcompany')
+                    this.loading=false
+                })
+                .catch(error => {
+                    console.error('Login failed:', error);
+                    this.loading=false
+                })
         }
     }
 }
