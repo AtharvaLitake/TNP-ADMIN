@@ -60,7 +60,10 @@ export default {
             axios.post('https://tnp-portal-backend-tpx5.onrender.com/api/v1/admins/login', adminCredentials)
                 .then(response => {
                     console.log('Login successful:', response.data);
+                    //Storing Token in Backend
                     localStorage.setItem('adminAuth', response.data.token)
+                    //Setting header as token
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
                     this.$router.push('/addcompany')
                     this.loading=false
                 })
