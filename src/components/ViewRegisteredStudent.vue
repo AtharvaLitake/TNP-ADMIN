@@ -9,7 +9,7 @@
             all individuals, ensuring they stay informed about upcoming recruitment
             drives and job openings.
         </p>
-        <v-data-table :headers="table_headers" :items="students" class="text-left text-primary">
+        <v-data-table :headers="table_headers" :items="unverified_students" class="text-left text-primary" :loading="loading">
             <template v-slot:item.actions="{ item }">
                 <v-btn color="primary">View Student Details</v-btn>
             </template>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import NavDrawer from '../BaseComponents/NavDrawer.vue';
 export default {
     components: {
@@ -25,58 +26,36 @@ export default {
     },
     data() {
         return {
-            students: [
-                {
-                    id: 1,
-                    name: 'Atharva Litake',
-                    registration_number: 'C2K21106776',
-                    university_prn: '72278822D',
-                },
-                {
-                    id: 2,
-                    name: 'Atharva Litake',
-                    registration_number: 'C2K21106776',
-                    university_prn: '72278822D',
-                },
-                {
-                    id: 3,
-                    name: 'Atharva Litake',
-                    registration_number: 'C2K21106776',
-                    university_prn: '72278822D',
-                },
-                {
-                    id: 4,
-                    name: 'Atharva Litake',
-                    registration_number: 'C2K21106776',
-                    university_prn: '72278822D',
-                },
-                {
-                    id: 5,
-                    name: 'Atharva Litake',
-                    registration_number: 'C2K21106776',
-                    university_prn: '72278822D',
-                },
-                {
-                    id: 6,
-                    name: 'Atharva Litake',
-                    registration_number: 'C2K21106776',
-                    university_prn: '72278822D',
-                },
-                {
-                    id: 7,
-                    name: 'Atharva Litake',
-                    registration_number: 'C2K21106776',
-                    university_prn: '72278822D',
-                },
-            ],
-
+            loading: true,
+            unverified_students: [],
             table_headers: [
-                { title: 'Student Name', key: 'name' },
-                { title: 'Registration Number', key: 'registration_number' },
-                { title: 'University PRN Number', key: 'university_prn' },
+                { title: 'Student Name', key: 'fullName' },
+                { title: 'Registration Number', key: 'pictRegistrationId' },
+                { title: 'University PRN Number', key: 'universityPRN' },
                 { title: 'Actions', key: 'actions' },
             ],
         };
+    },
+    mounted() {
+        this.fetchUnverifiedStudents()
+    },
+    methods: {
+        async fetchUnverifiedStudents() {
+            try {
+                const response = await axios.get(
+                    "https://tnp-portal-backend-tpx5.onrender.com/api/v1/students/unverified"
+                );
+                this.unverified_students = response.data.students;
+                console.log(this.unverified_students);
+            } catch (err) {
+                console.log(err);
+            } finally {
+                this.loading = false;
+            }
+        },
+        viewdetails(companyid) {
+            this.$router.push({ name: "jobdetails", params: { id: companyid } });
+        },
     }
 };
 </script>

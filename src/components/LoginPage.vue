@@ -62,8 +62,6 @@ export default {
                     console.log('Login successful:', response.data);
                     //Storing Token in Backend
                     localStorage.setItem('adminAuth', response.data.token)
-                    //Setting header as token
-                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
                     this.$router.push('/addcompany')
                     this.loading=false
                 })

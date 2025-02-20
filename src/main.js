@@ -12,6 +12,15 @@ import LoginPage from "./components/LoginPage.vue";
 import ViewRegisteredStudent from "./components/ViewRegisteredStudent.vue";
 import LockPage from "./components/LockPage.vue";
 //router setup
+//axios setup
+import axios from 'axios'
+
+//Attaching header
+const token = localStorage.getItem("adminAuth");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+
 const routes = [
   {
     path: "/addcompany",
