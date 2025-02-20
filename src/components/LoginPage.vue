@@ -10,7 +10,7 @@
                                 <v-img src="@/Images/pict-logo.jpg" style="width:15%"></v-img>
                                 <h1 class="text-h5 font-weight-bold text-primary my-5">TNP PORTAL</h1>
                                 <v-card class="text-justify pa-5" style="width:70%">
-                                    <h1 class="text-h5 font-weight-bold text-primary mb-1">Welcome Back</h1>
+                                    <h1 class="text-h5 font-weight-bold text-primary mb-1">Welcome TNP ADMIN</h1>
                                     <v-form @submit.prevent="loginform" class="pa-3 mt-3">
                                         <!-- Registration Number -->
                                         <v-text-field v-model="Admin_Email" label="Admin Email" class="mb-1 pa-1"
