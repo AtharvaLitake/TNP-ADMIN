@@ -11,7 +11,7 @@
         </p>
         <v-data-table :headers="table_headers" :items="unverified_students" class="text-left text-primary" :loading="loading">
             <template v-slot:item.actions="{ item }">
-                <v-btn color="primary">View Student Details</v-btn>
+                <v-btn color="primary" @click="studentdetails(item.id)">Details</v-btn>
             </template>
         </v-data-table>
     </v-container>
@@ -32,7 +32,7 @@ export default {
                 { title: 'Student Name', key: 'fullName' },
                 { title: 'Registration Number', key: 'pictRegistrationId' },
                 { title: 'University PRN Number', key: 'universityPRN' },
-                { title: 'Actions', key: 'actions' },
+                { title: 'View Registered Student Details', key: 'actions' },
             ],
         };
     },
@@ -53,8 +53,9 @@ export default {
                 this.loading = false;
             }
         },
-        viewdetails(companyid) {
-            this.$router.push({ name: "jobdetails", params: { id: companyid } });
+        studentdetails(studentID) {
+            this.$router.push({ name: "verifyStudent", params: { id: studentID } });
+            console.log(this.$router)
         },
     }
 };

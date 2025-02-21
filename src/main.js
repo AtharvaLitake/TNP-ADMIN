@@ -11,6 +11,7 @@ import AddNotification from "./components/AddNotification.vue";
 import LoginPage from "./components/LoginPage.vue";
 import ViewRegisteredStudent from "./components/ViewRegisteredStudent.vue";
 import LockPage from "./components/LockPage.vue";
+import VerifyStudent from "./components/VerifyStudent.vue";
 //router setup
 //axios setup
 import axios from 'axios'
@@ -39,6 +40,11 @@ const routes = [
     component: ViewRegisteredStudent,
   },
   { path: "/lockpage", name: "LockPage", component: LockPage },
+  {
+    path: "/verifystudent/:id",
+    name: "verifyStudent",
+    component: VerifyStudent,
+  },
 ];
 
 const router = createRouter({
