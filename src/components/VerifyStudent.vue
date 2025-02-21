@@ -14,7 +14,7 @@
     <div class="mx-auto my-2 pa-2 ml-15" max-width="900">
       <h1 class="text-h5 font-weight-bold text-primary mb-3 ml-3"
         >Student Details</h1>
-      <!---<v-divider class="mb-4"></v-divider>-->
+      <v-divider class="mb-4" color="primary" :thickness="3"></v-divider>
 
       <!-- Display based on current page -->
       <v-container>
@@ -49,6 +49,13 @@
         </v-row>
     </v-container>
       </v-container>
+      <v-row v-if="currentPage === 2" class="mt-4 mr-6">
+      <v-col cols="3">
+        <v-btn class="bg-primary" size="x-large" type="submit" block>
+          Validate
+        </v-btn>
+      </v-col>
+    </v-row>
 
       <!-- Pagination -->
       <v-pagination
@@ -58,6 +65,8 @@
         class="mt-4"
       ></v-pagination>
     </div>
+
+   
   </v-container>
 </template>
 
