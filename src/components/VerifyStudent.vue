@@ -139,6 +139,8 @@ export default {
           "panNumber",
           "passportNumber",
           "citizenship",
+          "elqScore ",
+          "automataScore",
           "documentsURL", "amcatResultURL", "beReceiptURL"
         ],
  
