@@ -12,7 +12,8 @@ import LoginPage from "./components/LoginPage.vue";
 import ViewRegisteredStudent from "./components/ViewRegisteredStudent.vue";
 import LockPage from "./components/LockPage.vue";
 import VerifyStudent from "./components/VerifyStudent.vue";
-//router setup
+import ListedCompany from "./components/ListedCompany.vue";
+import AppliedStudents from "./components/AppliedStudents.vue";
 //axios setup
 import axios from 'axios'
 
@@ -22,6 +23,7 @@ if (token) {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }
 
+//router setup
 const routes = [
   {
     path: "/addcompany",
@@ -44,6 +46,16 @@ const routes = [
     path: "/verifystudent/:id",
     name: "verifyStudent",
     component: VerifyStudent,
+  },
+  {
+    path:'/listedjobs',
+    name:"ListedCompany",
+    component:ListedCompany
+  },
+  {
+    path: "/appliedstudents/:id",
+    name: "AppliedStudents",
+    component: AppliedStudents,
   },
 ];
 

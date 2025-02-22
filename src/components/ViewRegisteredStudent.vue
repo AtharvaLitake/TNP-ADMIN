@@ -1,5 +1,4 @@
 <!-- eslint-disable vue/no-unused-vars -->
-<!-- eslint-disable vue/valid-v-slot -->
 <template>
     <nav-drawer></nav-drawer>
     <v-container class="px-15">
@@ -10,6 +9,7 @@
             drives and job openings.
         </p>
         <v-data-table :headers="table_headers" :items="unverified_students" class="text-left text-primary" :loading="loading">
+            <!-- eslint-disable vue/valid-v-slot -->
             <template v-slot:item.actions="{ item }">
                 <v-btn color="primary" @click="studentdetails(item.id)">Details</v-btn>
             </template>
@@ -55,7 +55,6 @@ export default {
         },
         studentdetails(studentID) {
             this.$router.push({ name: "verifyStudent", params: { id: studentID } });
-            console.log(this.$router)
         },
     }
 };
