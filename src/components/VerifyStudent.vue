@@ -54,7 +54,7 @@
     </v-container>
 
     <!-- Validate Button on Page 2 -->
-    <v-row v-if="currentPage === 2" class="mt-4 mr-6">
+    <v-row v-if="currentPage === 2" class="d-flex justify-center pa-6 mt-8">
       <v-col cols="3">
         <v-btn class="bg-primary" size="x-large" type="submit" block>
           Validate
@@ -150,10 +150,10 @@ export default {
     this.studentId = this.$route.params.id;
   },
   mounted() {
-    this.fetchJobDetails(this.studentId);
+    this.fetchStudentDetails(this.studentId);
   },
   methods: {
-    async fetchJobDetails(id) {
+    async fetchStudentDetails(id) {
       try {
         const response = await axios.get(
           `https://tnp-portal-backend-tpx5.onrender.com/api/v1/students/${id}`
