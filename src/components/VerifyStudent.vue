@@ -11,45 +11,50 @@
     ></v-progress-circular>
   </div>
   <v-container v-else>
-    <div class="mx-auto my-2 pa-2 ml-15" max-width="900">
-      <h1 class="text-h5 font-weight-bold text-primary mb-3 ml-3"
-        >Student Details</h1>
-      <v-divider class="mb-4" color="primary" :thickness="3"></v-divider>
+  <div class="mx-auto my-2 pa-2 ml-15" max-width="900">
+    <h1 class="text-h5 font-weight-bold text-primary mb-3 ml-3">
+      Student Details
+    </h1>
+    <v-divider class="mb-4" color="primary" :thickness="3"></v-divider>
 
-      <!-- Display based on current page -->
-      <v-container>
-        <!----<v-row v-for="key in getCurrentPageKeys()" :key="key" class="mb-3">
-          <v-col cols="4" class="font-weight-bold text-primary">{{ formatKey(key) }}:</v-col>
-          <v-col cols="8">{{ studentDetails[key] || "N/A" }}</v-col>
-        </v-row>-->
-        <v-container class="pa-0" style="gap: 8px;">
-        <v-row v-for="key in getCurrentPageKeys()" :key="key" class="align-center" dense>
-          <v-col cols="4" class="font-weight-bold text-primary" style="font-size: 20px;"
-            >{{ formatKey(key) }}:</v-col
-          >
-          <v-col cols="8">
-            <template v-if="isPdfUrl(key)">
-              <v-btn
-                color="primary"
-                :href="studentDetails[key]"
-                target="_blank"
-                download 
-                style="min-width: 180px; text-align: center;"
-              >
-              {{ getButtonLabel(key) }}
-              </v-btn>
-            </template>
-            <template v-else>
-  <span class="text-justify " style="color: rgba(8, 30, 127, 0.6); font-size: 20px; font-weight: 500;"> 
-    {{ studentDetails[key] || "N/A" }}
-  </span>
-</template>
+    <!-- Display based on current page -->
+    <v-container class="pa-0 ml-3">
+      <v-row>
+        <template v-for="(key) in getCurrentPageKeys()" :key="key">
+          <v-col cols="6">
+            <v-row dense class="align-center">
+              <!-- Label Column (40%) -->
+              <v-col cols="5" class="font-weight-bold text-primary" style="font-size: 18px;">
+                {{ formatKey(key) }}:
+              </v-col>
 
+              <!-- Value Column (60%) -->
+              <v-col cols="7">
+                <template v-if="isPdfUrl(key)">
+                  <v-btn
+                    color="primary"
+                    :href="studentDetails[key]"
+                    target="_blank"
+                    download
+                    style="min-width: 180px; text-align: center;"
+                  >
+                    {{ getButtonLabel(key) }}
+                  </v-btn>
+                </template>
+                <template v-else>
+                  <span class="text-justify" style="color: rgba(8, 30, 127, 0.6); font-size: 18px; font-weight: 500;">
+                    {{ studentDetails[key] || "N/A" }}
+                  </span>
+                </template>
+              </v-col>
+            </v-row>
           </v-col>
-        </v-row>
+        </template>
+      </v-row>
     </v-container>
-      </v-container>
-      <v-row v-if="currentPage === 2" class="mt-4 mr-6">
+
+    <!-- Validate Button on Page 2 -->
+    <v-row v-if="currentPage === 2" class="mt-4 mr-6">
       <v-col cols="3">
         <v-btn class="bg-primary" size="x-large" type="submit" block>
           Validate
@@ -57,17 +62,11 @@
       </v-col>
     </v-row>
 
-      <!-- Pagination -->
-      <v-pagination
-        v-model="currentPage"
-        :length="2"
-        color="primary"
-        class="mt-4"
-      ></v-pagination>
-    </div>
+    <!-- Pagination -->
+    <v-pagination v-model="currentPage" :length="2" color="primary" class="mt-4"></v-pagination>
+  </div>
+</v-container>
 
-   
-  </v-container>
 </template>
 
 <script>
@@ -83,9 +82,8 @@ export default {
       studentDetails: {},
       loading: true,
       error: null,
-      currentPage: 1, 
+      currentPage: 1,
 
-      
       studentKeys: [
         [
           "fullName",
@@ -116,14 +114,14 @@ export default {
           "noOfGapYearsAfter12th",
           "reasonOfGapAfter12th",
           "percentageDiploma",
+        ],
+        [
           "universityOfDiploma",
           "passingYearDiploma",
           "noOfGapYearsAfterDiploma",
           "reasonOfGapAfterDiploma",
           "percentileCet",
           "percentileJee",
-        ],
-        [
           "collegeStartedYear",
           "sgpaFeSem1",
           "sgpaFeSem2",
@@ -139,11 +137,12 @@ export default {
           "panNumber",
           "passportNumber",
           "citizenship",
-          "elqScore ",
+          "elqScore",
           "automataScore",
-          "documentsURL", "amcatResultURL", "beReceiptURL"
+          "documentsURL",
+          "amcatResultURL",
+          "beReceiptURL",
         ],
- 
       ],
     };
   },
@@ -172,21 +171,21 @@ export default {
       return ["documentsURL", "amcatResultURL", "beReceiptURL"].includes(key);
     },
     getButtonLabel(key) {
-    const labels = {
-      documentsURL: "View Documents",
-      amcatResultURL: "View Amcat PDF",
-      beReceiptURL: "View BE Receipt"
-    };
-    return labels[key] || "Download File"; 
-  },
+      const labels = {
+        documentsURL: "View Documents",
+        amcatResultURL: "View Amcat PDF",
+        beReceiptURL: "View BE Receipt",
+      };
+      return labels[key] || "Download File";
+    },
     getCurrentPageKeys() {
       return this.studentKeys[this.currentPage - 1] || [];
     },
     formatKey(key) {
       return key
-        .replace(/_/g, " ") 
-        .replace(/([a-z])([A-Z])/g, "$1 $2") 
-        .replace(/\b\w/g, (char) => char.toUpperCase()); 
+        .replace(/_/g, " ")
+        .replace(/([a-z])([A-Z])/g, "$1 $2")
+        .replace(/\b\w/g, (char) => char.toUpperCase());
     },
   },
 };
@@ -196,5 +195,4 @@ export default {
 .custom_loader {
   height: 90vh;
 }
-
 </style>
