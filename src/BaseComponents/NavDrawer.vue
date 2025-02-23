@@ -43,7 +43,7 @@ export default {
           "https://tnp-portal-backend-tpx5.onrender.com/api/v1/admins/logout");
         localStorage.removeItem("adminAuth");
         this.loader = false;
-        this.$router.push("/")
+        this.$router.push("/login")
       } catch (error) {
         console.error("Error uploading:", error);
       }

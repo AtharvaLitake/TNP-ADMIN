@@ -14,8 +14,10 @@ import LockPage from "./components/LockPage.vue";
 import VerifyStudent from "./components/VerifyStudent.vue";
 import ListedCompany from "./components/ListedCompany.vue";
 import AppliedStudents from "./components/AppliedStudents.vue";
+import SplashScreen from "./BaseComponents/SplashScreen.vue";
+import NotFound from "./BaseComponents/NotFound.vue"
 //axios setup
-import axios from 'axios'
+import axios from "axios";
 
 //Attaching header
 const token = localStorage.getItem("adminAuth");
@@ -35,7 +37,7 @@ const routes = [
     name: "AddNotification",
     component: AddNotification,
   },
-  { path: "/", name: "LoginPage", component: LoginPage },
+  { path: "/login", name: "LoginPage", component: LoginPage },
   {
     path: "/registeredstudent",
     name: "ViewRegisteredStudent",
@@ -48,14 +50,20 @@ const routes = [
     component: VerifyStudent,
   },
   {
-    path:'/listedjobs',
-    name:"ListedCompany",
-    component:ListedCompany
+    path: "/listedjobs",
+    name: "ListedCompany",
+    component: ListedCompany,
   },
   {
     path: "/appliedstudents/:id",
     name: "AppliedStudents",
     component: AppliedStudents,
+  },
+  { path: "/", name: "SplashScreen", component: SplashScreen },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFound,
   },
 ];
 
