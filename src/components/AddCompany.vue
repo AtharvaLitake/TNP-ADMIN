@@ -20,6 +20,7 @@
                 color="primary"
                 style="color: rgba(8, 30, 127)"
                 v-model="company_name"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-text-field>
               <v-text-field
                 label="Enter the Package of Company"
@@ -31,6 +32,7 @@
                 :min="0"
                 style="color: rgba(8, 30, 127)"
                 v-model="company_package"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-text-field>
               <v-file-input
                 label="Company Logo File"
@@ -38,6 +40,7 @@
                 color="primary"
                 style="color: rgba(8, 30, 127)"
                 v-model="company_logo"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-file-input>
               <v-text-field
                 label="Job Role"
@@ -47,6 +50,7 @@
                 color="primary"
                 style="color: rgba(8, 30, 127)"
                 v-model="job_role"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-text-field>
               <v-text-field
                 label="Job Location"
@@ -56,6 +60,7 @@
                 color="primary"
                 style="color: rgba(8, 30, 127)"
                 v-model="job_location"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-text-field>
               <v-textarea
                 label="Company Description"
@@ -66,6 +71,7 @@
                 hint="Maximum 100 characters allowed"
                 persistent-hint
                 v-model="company_desc"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-textarea>
               <v-text-field
                 label="Company Webiste URL"
@@ -75,7 +81,8 @@
                 type="url"
                 placeholder="Enter the Company URL"
                 style="color: rgba(8, 30, 127)"
-                v-model="company_url"
+                v-model="company_website_url"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-text-field>
               <v-text-field
                 label="Application Deadline"
@@ -85,22 +92,38 @@
                 type="datetime-local"
                 placeholder="Select Date & Time"
                 style="color: rgba(8, 30, 127)"
-                v-model="app_deadline"
+                v-model="application_deadline"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-text-field>
-              <v-select
-                label="Select Eligible Branches"
-                class="mb-1 text-primary font-weight-medium"
-                :items="['CE', 'IT', 'ENTC','CE & IT','ALL']"
-                v-model="eligible_branch"
-              ></v-select>
-            </v-col>
-            <v-col cols="5">
+              <p
+                class="text-justify text-h7 pa-1"
+                style="color: rgba(8, 30, 127, 0.6)"
+              >
+                Select Eligible Branches
+              </p>
+              <br>
+              <v-checkbox
+                v-for="branch in ['CE', 'IT', 'ENTC']"
+                :key="branch"
+                v-model="eligible_branches"
+                :label="branch"
+                :value="branch"
+                color="primary"
+                class="mt-n10"
+                style="color: rgba(8, 30, 127, 0.6)"
+               :rules="[(v) => !!v || 'This is required field']"
+              ></v-checkbox>
+              <p>Selected: {{ eligible_branches }}</p>
+
               <v-select
                 label="If Dream Company ?"
                 class="mb-1 text-primary font-weight-medium"
                 :items="['Yes', 'No']"
                 v-model="dream_company"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-select>
+            </v-col>
+            <v-col cols="5">
               <v-text-field
                 label="10th Percentage Criteria"
                 class="mb-1 pa-1"
@@ -110,6 +133,7 @@
                 type="number"
                 style="color: rgba(8, 30, 127)"
                 v-model="percentage_10th"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-text-field>
               <v-text-field
                 label="12th Percentage Criteria"
@@ -120,6 +144,18 @@
                 type="number"
                 style="color: rgba(8, 30, 127)"
                 v-model="percentage_12th"
+                :rules="[(v) => !!v || 'This is required field']"
+              ></v-text-field>
+              <v-text-field
+                label="Diploma Percentage Criteria"
+                class="mb-1 pa-1"
+                placeholder="Enter 12th Percentage Criteria"
+                variant="underlined"
+                color="primary"
+                type="number"
+                style="color: rgba(8, 30, 127)"
+                v-model="percentage_diploma"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-text-field>
               <v-text-field
                 label="CGPA Criteria"
@@ -130,6 +166,29 @@
                 type="number"
                 style="color: rgba(8, 30, 127)"
                 v-model="cgpa"
+                :rules="[(v) => !!v || 'This is required field']"
+              ></v-text-field>
+              <v-text-field
+                label="Active Backlog"
+                class="mb-1 pa-1"
+                placeholder="Enter CGPA Criteria"
+                variant="underlined"
+                color="primary"
+                type="number"
+                style="color: rgba(8, 30, 127)"
+                v-model="active_backlogs"
+                :rules="[(v) => !!v || 'This is required field']"
+              ></v-text-field>
+              <v-text-field
+                label="Passive Backlog"
+                class="mb-1 pa-1"
+                placeholder="Enter CGPA Criteria"
+                variant="underlined"
+                color="primary"
+                type="number"
+                style="color: rgba(8, 30, 127)"
+                v-model="passive_backlogs"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-text-field>
               <v-text-field
                 label="Automata Score"
@@ -139,7 +198,8 @@
                 color="primary"
                 type="number"
                 style="color: rgba(8, 30, 127)"
-                v-model="automata"
+                v-model="automata_score"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-text-field>
               <v-text-field
                 label="ELQ Score"
@@ -149,7 +209,8 @@
                 color="primary"
                 type="number"
                 style="color: rgba(8, 30, 127)"
-                v-model="elq"
+                v-model="elq_score"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-text-field>
               <v-textarea
                 label="Selection Process Description"
@@ -160,6 +221,7 @@
                 hint="Maximum 100 characters allowed"
                 persistent-hint
                 v-model="selection_process"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-textarea>
               <v-file-input
                 label="Job Description File"
@@ -167,6 +229,7 @@
                 color="primary"
                 style="color: rgba(8, 30, 127)"
                 v-model="company_jd"
+                :rules="[(v) => !!v || 'This is required field']"
               ></v-file-input>
               <v-btn
                 class="mt-4 bg-primary"
@@ -184,10 +247,13 @@
 </template>
 
 <script>
+import axios from "axios";
 import NavDrawer from "../BaseComponents/NavDrawer.vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 export default {
-  components:{
-    'nav-drawer':NavDrawer,
+  components: {
+    "nav-drawer": NavDrawer,
   },
   data() {
     return {
@@ -197,39 +263,108 @@ export default {
       job_role: "",
       job_location: "",
       company_desc: "",
-      app_deadline: null,
-      eligible_branch: "",
-      company_url:null,
+      application_deadline: null,
+      eligible_branches: [],
+      company_website_url: null,
       dream_company: "",
       percentage_10th: null,
       percentage_12th: null,
+      percentage_diploma: null,
       cgpa: null,
-      automata: null,
-      elq: null,
+      active_backlogs: null,
+      passive_backlogs: null,
+      automata_score: null,
+      elq_score: null,
       company_jd: null,
       selection_process: "",
     };
   },
   methods: {
-    addlisting() {
-      console.log({
-        company_name: this.company_name,
-        company_package: this.company_package,
-        company_logo: this.company_logo,
-        job_role: this.job_role,
-        job_location: this.job_location,
-        company_desc: this.company_desc,
-        app_deadline: this.app_deadline,
-        eligible_branch: this.eligible_branch,
-        dream_company: this.dream_company,
-        percentage_10th: this.percentage_10th,
-        percentage_12th: this.percentage_12th,
-        cgpa: this.cgpa,
-        automata: this.automata,
-        elq: this.elq,
-        company_jd: this.company_jd,
-        selection_process: this.selection_process,
-      });
+    async addlisting() {
+      const apiUrl = "https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs";
+      
+      const formData = new FormData();
+      formData.append("company_name", this.company_name);
+      formData.append("company_package", this.company_package);
+      formData.append("company_logo", this.company_logo);
+      formData.append("job_role", this.job_role);
+      formData.append("job_location", this.job_location);
+      formData.append("company_desc", this.company_desc);
+      formData.append("application_deadline", this.application_deadline);
+      formData.append("eligible_branches", this.eligible_branches);
+      formData.append("company_website_url", this.company_website_url);
+      formData.append("dream_company", this.dream_company);
+      formData.append("percentage_10th", this.percentage_10th);
+      formData.append("percentage_12th", this.percentage_12th);
+      formData.append("percentage_diploma", this.percentage_diploma);
+      formData.append("cgpa", this.cgpa);
+      formData.append("automata_score", this.automata_score);
+      formData.append("elq_score", this.elq_score);
+      formData.append("active_backlogs", this.active_backlogs);
+      formData.append("passive_backlogs", this.passive_backlogs);
+      formData.append("company_jd", this.company_jd);
+      formData.append("selection_process", this.selection_process);
+
+      try {
+        const response = await axios.post(apiUrl, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        console.log("API Response:", response.data);
+        toast.success("Form submitted successfully!", {
+          position: "top-center",
+          autoClose: 4000,
+          style: {
+            width: "600px",
+            height: "400px",
+            fontSize: "18px",
+            padding: "20px",
+            textAlign: "center",
+          },
+        });
+        this.resetForm();
+      } catch (error) {
+        console.error(
+          "Error adding company:",
+          error.response ? error.response.data : error.message
+        );
+        toast.error("⚠️ Please fill all fields!", {
+          position: "top-center",
+          autoClose: 4000,
+          style: {
+            width: "600px",
+            height: "400px",
+            fontSize: "18px",
+            padding: "20px",
+            textAlign: "center",
+          },
+        });
+        return;
+      }
+    },
+    resetForm() {
+      this.company_name = "";
+      this.company_package = null;
+      this.company_logo = null;
+      this.job_role = "";
+      this.job_location = "";
+      this.company_desc = "";
+      this.application_deadline = null;
+      this.eligible_branches = "";
+      this.company_website_url = null;
+      this.dream_company = "";
+      this.percentage_10th = null;
+      this.percentage_12th = null;
+      this.percentage_diploma = null;
+      this.cgpa = null;
+      this.active_backlogs = null;
+      this.passive_backlogs = null;
+      this.automata_score = null;
+      this.elq_score = null;
+      this.company_jd = null;
+      this.selection_process = "";
     },
   },
 };

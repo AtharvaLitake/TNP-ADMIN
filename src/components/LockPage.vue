@@ -8,7 +8,7 @@
                     </v-col>
                 </v-row>
                 <h1 class="text-primary mt-5">Login to Access the Portal</h1>
-                <v-btn class="mt-4 bg-primary" size="x-large">Login Now</v-btn>
+                <v-btn class="mt-4 bg-primary" size="x-large" to="/login">Login Now</v-btn>
             </v-col>
         </v-row>
     </v-container>

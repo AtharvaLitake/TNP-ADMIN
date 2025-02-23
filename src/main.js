@@ -75,7 +75,7 @@ const router = createRouter({
 //guard for login
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem("adminAuth");
-  if (to.path !== "/" && to.path !== "/lockpage") {
+  if (to.path !== "/" && to.path !== "/lockpage" && to.path !== "/login") {
     to.meta.requiresAuth = true;
   }
   if (
