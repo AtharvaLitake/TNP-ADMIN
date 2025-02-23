@@ -22,7 +22,7 @@
       <v-row>
         <template v-for="(key) in getCurrentPageKeys()" :key="key">
           <v-col cols="6">
-            <v-row dense class="align-center">
+            <v-row dense>
               <!-- Label Column (40%) -->
               <v-col cols="5" class="font-weight-bold text-primary" style="font-size: 18px;">
                 {{ formatKey(key) }}:
@@ -56,7 +56,7 @@
     <!-- Validate Button on Page 2 -->
     <v-row v-if="currentPage === 2" class="d-flex justify-center pa-6 mt-8">
       <v-col cols="3">
-        <v-btn class="bg-primary" size="x-large" type="submit" block>
+        <v-btn class="bg-primary" size="x-large" type="submit" block :loading="btnloading" @click="validateStudent(studentId)">
           Validate
         </v-btn>
       </v-col>
@@ -81,6 +81,7 @@ export default {
       studentId: null,
       studentDetails: {},
       loading: true,
+      btnloading:false,
       error: null,
       currentPage: 1,
 
@@ -165,6 +166,18 @@ export default {
         console.error(err);
       } finally {
         this.loading = false;
+      }
+    },
+    async validateStudent(studentId){
+      this.btnloading=true;
+      try {
+        await axios.post(
+          `https://tnp-portal-backend-tpx5.onrender.com/api/v1/students/${studentId}/verify`
+        );
+        this.$router.push("/registeredstudent")
+      } catch (err) {
+        this.error = "Failed to Validate student details";
+        console.error(err);
       }
     },
     isPdfUrl(key) {
