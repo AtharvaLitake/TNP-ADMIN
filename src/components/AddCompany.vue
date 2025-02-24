@@ -113,8 +113,6 @@
                 style="color: rgba(8, 30, 127, 0.6)"
                :rules="[(v) => !!v || 'This is required field']"
               ></v-checkbox>
-              <p>Selected: {{ eligible_branches }}</p>
-
               <v-select
                 label="If Dream Company ?"
                 class="mb-1 text-primary font-weight-medium"
