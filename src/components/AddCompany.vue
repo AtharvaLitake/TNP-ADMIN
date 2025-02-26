@@ -279,8 +279,6 @@ export default {
   },
   methods: {
     async addlisting() {
-      const apiUrl = "https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs";
-      
       const formData = new FormData();
       formData.append("company_name", this.company_name);
       formData.append("company_package", this.company_package);
@@ -304,12 +302,12 @@ export default {
       formData.append("selection_process", this.selection_process);
 
       try {
-        const response = await axios.post(apiUrl, formData, {
+        const response = await axios.post("https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
+            "Authorization": `Bearer ${localStorage.getItem("adminAuth")}`
           },
         });
-
         console.log("API Response:", response.data);
         toast.success("Form submitted successfully!", {
           position: "top-center",
