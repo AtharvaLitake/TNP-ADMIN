@@ -302,7 +302,7 @@ export default {
       formData.append("selection_process", this.selection_process);
 
       try {
-        const response = await axios.post("https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs", formData, {
+        await axios.post("https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             "Authorization": `Bearer ${localStorage.getItem("adminAuth")}`
