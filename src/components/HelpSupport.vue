@@ -8,10 +8,11 @@
       concerns.
     </p>
     <div class="d-flex justify-end">
-      <v-btn class="mt-2 bg-primary" text="Summarize Queries" size="large" @click="summarizequeries"
+      <v-btn class="mt-2 mb-2 bg-primary" text="Summarize Queries" size="large" @click="summarizequeries"
         :loading="summary_loader"></v-btn>
     </div>
-    <div v-if="summarize_text.length != 0" class="text-justify my-3" style="color: rgba(8, 30, 127, 0.6)">
+    <div v-if="summarize_text.length != 0" class="text-justify mt-3 mb-3" style="color: rgba(8, 30, 127, 0.6)">
+      <h1 class="text-h6 font-weight-bold text-primary mb-1">Summarized Content:</h1>
       <p class="text-body-1">{{ summarize_text }}</p>
     </div>
     <h1 class="text-h6 font-weight-bold text-primary mb-1">Student Queries:</h1>
