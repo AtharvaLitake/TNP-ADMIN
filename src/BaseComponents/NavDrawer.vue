@@ -17,7 +17,7 @@
         to="/listedjobs"></v-list-item>
       <v-list-item prepend-icon="mdi-account-group-outline" title="View Registered Students" value="registeredStudents"
         to="/registeredstudent"></v-list-item>
-      <v-list-item prepend-icon="mdi-forum" title="Help & Support" value="HelpSupport" to="/"></v-list-item>
+      <v-list-item prepend-icon="mdi-forum" title="Help & Support" value="HelpSupport" to="/help"></v-list-item>
     </v-list>
 
     <template v-slot:append>

@@ -16,6 +16,7 @@ import ListedCompany from "./components/ListedCompany.vue";
 import AppliedStudents from "./components/AppliedStudents.vue";
 import SplashScreen from "./BaseComponents/SplashScreen.vue";
 import NotFound from "./BaseComponents/NotFound.vue"
+import HelpSupport from "./components/HelpSupport.vue";
 //axios setup
 import axios from "axios";
 
@@ -53,6 +54,11 @@ const routes = [
     path: "/listedjobs",
     name: "ListedCompany",
     component: ListedCompany,
+  },
+  {
+    path: "/help",
+    name: "HelpSupport",
+    component: HelpSupport,
   },
   {
     path: "/appliedstudents/:id",
