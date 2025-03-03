@@ -279,8 +279,6 @@ export default {
   },
   methods: {
     async addlisting() {
-      const apiUrl = "https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs";
-      
       const formData = new FormData();
       formData.append("company_name", this.company_name);
       formData.append("company_package", this.company_package);
@@ -304,13 +302,12 @@ export default {
       formData.append("selection_process", this.selection_process);
 
       try {
-        const response = await axios.post(apiUrl, formData, {
+        await axios.post("https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
+            "Authorization": `Bearer ${localStorage.getItem("adminAuth")}`
           },
         });
-
-        console.log("API Response:", response.data);
         toast.success("Form submitted successfully!", {
           position: "top-center",
           autoClose: 4000,
@@ -322,7 +319,7 @@ export default {
             textAlign: "center",
           },
         });
-        this.resetForm();
+        this.$router.push('/listedjobs')
       } catch (error) {
         console.error(
           "Error adding company:",
@@ -341,28 +338,6 @@ export default {
         });
         return;
       }
-    },
-    resetForm() {
-      this.company_name = "";
-      this.company_package = null;
-      this.company_logo = null;
-      this.job_role = "";
-      this.job_location = "";
-      this.company_desc = "";
-      this.application_deadline = null;
-      this.eligible_branches = "";
-      this.company_website_url = null;
-      this.dream_company = "";
-      this.percentage_10th = null;
-      this.percentage_12th = null;
-      this.percentage_diploma = null;
-      this.cgpa = null;
-      this.active_backlogs = null;
-      this.passive_backlogs = null;
-      this.automata_score = null;
-      this.elq_score = null;
-      this.company_jd = null;
-      this.selection_process = "";
     },
   },
 };
