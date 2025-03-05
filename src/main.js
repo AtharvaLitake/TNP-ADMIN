@@ -17,6 +17,7 @@ import AppliedStudents from "./components/AppliedStudents.vue";
 import SplashScreen from "./BaseComponents/SplashScreen.vue";
 import NotFound from "./BaseComponents/NotFound.vue"
 import HelpSupport from "./components/HelpSupport.vue";
+import AdminDashboard from "./components/AdminDashboard.vue";
 //axios setup
 import axios from "axios";
 
@@ -59,6 +60,11 @@ const routes = [
     path: "/help",
     name: "HelpSupport",
     component: HelpSupport,
+  },
+  {
+    path: "/dashboard",
+    name: "AdminDashboard",
+    component: AdminDashboard,
   },
   {
     path: "/appliedstudents/:id",

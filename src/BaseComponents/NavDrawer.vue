@@ -8,7 +8,7 @@
     <v-divider></v-divider>
 
     <v-list density="compact" nav>
-      <v-list-item prepend-icon="mdi-view-dashboard" title="Dashboard" value="dashboard" to="/"></v-list-item>
+      <v-list-item prepend-icon="mdi-view-dashboard" title="Dashboard" value="dashboard" to="/dashboard"></v-list-item>
       <v-list-item prepend-icon="mdi-home-city" title="Add Job Opportunity" value="addCompany"
         to="/addcompany"></v-list-item>
       <v-list-item prepend-icon="mdi-bell" title="Send Notices" value="addNotifications"
