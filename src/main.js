@@ -17,8 +17,10 @@ import AppliedStudents from "./components/AppliedStudents.vue";
 import SplashScreen from "./BaseComponents/SplashScreen.vue";
 import NotFound from "./BaseComponents/NotFound.vue"
 import HelpSupport from "./components/HelpSupport.vue";
+import ViewVerifiedStudents from "./components/ViewVerifiedStudents.vue"
 //axios setup
 import axios from "axios";
+import StudentsDetails from "./components/StudentsDetails.vue";
 
 //Attaching header
 const token = localStorage.getItem("adminAuth");
@@ -64,6 +66,16 @@ const routes = [
     path: "/appliedstudents/:id",
     name: "AppliedStudents",
     component: AppliedStudents,
+  },
+  {
+    path: "/students",
+    name: "ViewVerifiedStudents",
+    component: ViewVerifiedStudents,
+  },
+  {
+    path: "/students/:id",
+    name: "StudentDetails",
+    component: StudentsDetails,
   },
   { path: "/", name: "SplashScreen", component: SplashScreen },
   {
