@@ -34,12 +34,12 @@
               </div>
             </v-expansion-panel-title>
             <v-expansion-panel-text class="text-primary mt-3">
-              <v-textarea v-model="userInput" label="Reply here" outlined color="primary" rows="2"
-                class="custom-textarea"></v-textarea>
+              <v-textarea label="Reply here" outlined color="primary" rows="2"
+                class="custom-textarea" v-model="reply"></v-textarea>
               <div class="d-flex justify-end">
                 <v-btn class="mt-0 mr-2 bg-primary" text="Delete Query" size="large"
                   @click="deletequery(query.id)"></v-btn>
-                <v-btn class="mt-0 bg-primary" text="Send Reply" size="large" type="submit"></v-btn>
+                <v-btn class="mt-0 bg-primary" text="Send Reply" size="large" type="submit" @click="sendReply(query.id)"></v-btn>
               </div>
             </v-expansion-panel-text>
           </v-expansion-panel>
@@ -57,6 +57,7 @@ export default {
       summarize_text: "",
       summary_loader: false,
       queries: [],
+      reply:""
     };
   },
   components: {
@@ -99,7 +100,18 @@ export default {
         console.error("Error deleting query:", error);
         alert("Failed to delete query. Please try again.");
       }
-    }
+    },
+    async sendReply(queryId) {
+      try {
+        await axios.post(
+          `https://tnp-portal-backend-tpx5.onrender.com/api/v1/queries/${queryId}/reply`,
+          {reply:this.reply}
+        );
+        this.reply=''
+      } catch (err) {
+        console.log(err);
+      }
+    },
 
 
   },
