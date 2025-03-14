@@ -19,6 +19,8 @@
         to="/registeredstudent"></v-list-item>
       <v-list-item prepend-icon="mdi-account-group-outline" title="View All Students" value="verifiedStudents"
         to="/students"></v-list-item>
+      <v-list-item prepend-icon="mdi-home-city" title="Mark as Placed" value="MarkPlaced"
+        to="/markplaced"></v-list-item>
       <v-list-item prepend-icon="mdi-forum" title="Help & Support" value="HelpSupport" to="/help"></v-list-item>
     </v-list>
 

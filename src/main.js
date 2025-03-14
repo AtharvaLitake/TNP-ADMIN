@@ -19,9 +19,12 @@ import NotFound from "./BaseComponents/NotFound.vue"
 import HelpSupport from "./components/HelpSupport.vue";
 import AdminDashboard from "./components/AdminDashboard.vue";
 import ViewVerifiedStudents from "./components/ViewVerifiedStudents.vue"
+import StudentsDetails from "./components/StudentsDetails.vue";
+import MarkPlaced from "./components/MarkPlaced.vue";
+import MarkPlacedStudents from "./components/MarkPlacedStudents.vue";
 //axios setup
 import axios from "axios";
-import StudentsDetails from "./components/StudentsDetails.vue";
+
 
 //Attaching header
 const token = localStorage.getItem("adminAuth");
@@ -82,6 +85,16 @@ const routes = [
     path: "/students/:id",
     name: "StudentDetails",
     component: StudentsDetails,
+  },
+  {
+    path: "/markplaced",
+    name: "MarkPlaced",
+    component: MarkPlaced,
+  },
+  {
+    path: "/markplaced/:id",
+    name: "MarkPlacedStudents",
+    component: MarkPlacedStudents,
   },
   { path: "/", name: "SplashScreen", component: SplashScreen },
   {
