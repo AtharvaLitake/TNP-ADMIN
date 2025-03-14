@@ -18,7 +18,13 @@
 export default {
     mounted() {
         setTimeout(() => {
+        const token = localStorage.getItem("adminAuth");
+        if (token) {
+            this.$router.push("/addcompany"); 
+        }
+        else{
             this.$router.push("/login"); 
+        }
         }, 4700);
     }
 }
