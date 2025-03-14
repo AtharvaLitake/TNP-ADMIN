@@ -11,7 +11,7 @@
         <v-text-field v-model="search" class="text-primary mt-5 mb-1 text-body-1" color="primary"
             append-inner-icon="mdi-magnify" label="Search by Name, Registration_ID or PRN" variant="outlined"
             clearable></v-text-field>
-        <v-data-table :headers="table_headers" :items="unverified_students" class="text-left text-primary"
+        <v-data-table :headers="table_headers" :items="filteredStudents"  class="text-left text-primary"
             :loading="loading">
             <!-- eslint-disable vue/valid-v-slot -->
             <template v-slot:item.actions="{ item }">
