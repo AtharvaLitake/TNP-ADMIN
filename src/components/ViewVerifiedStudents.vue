@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-unused-vars -->
 <template>
     <nav-drawer></nav-drawer>
     <v-container class="px-15">
@@ -7,7 +6,9 @@
             Through this page, you can see all the students registered on this portal for the placement opportunities.
             Click on View Details to check each and every student details.
         </p>
-        <v-data-table :headers="table_headers" :items="unverified_students" class="text-left text-primary"
+        <v-text-field v-model="search" class="text-primary mt-5 mb-1 text-body-1" color="primary" append-inner-icon="mdi-magnify"
+            label="Search by Name, Registration_ID or PRN" variant="outlined" clearable></v-text-field>
+        <v-data-table :headers="table_headers" :items="filteredStudents" class="text-left text-primary"
             :loading="loading">
             <!-- eslint-disable vue/valid-v-slot -->
             <template v-slot:item.actions="{ item }">
@@ -28,6 +29,7 @@ export default {
         return {
             loading: true,
             unverified_students: [],
+            search: "",
             table_headers: [
                 { title: 'Student Name', key: 'fullName' },
                 { title: 'Registration Number', key: 'pictRegistrationId' },
@@ -36,8 +38,18 @@ export default {
             ],
         };
     },
+    computed: {
+        filteredStudents() {
+            if (!this.search) return this.unverified_students;
+            return this.unverified_students.filter(student =>
+                student.fullName.toLowerCase().includes(this.search.toLowerCase()) ||
+                student.pictRegistrationId.toLowerCase().includes(this.search.toLowerCase()) ||
+                student.universityPRN.toLowerCase().includes(this.search.toLowerCase())
+            );
+        }
+    },
     mounted() {
-        this.fetchverifiedStudents()
+        this.fetchverifiedStudents();
     },
     methods: {
         async fetchverifiedStudents() {
@@ -46,7 +58,6 @@ export default {
                     "https://tnp-portal-backend-tpx5.onrender.com/api/v1/students/verified"
                 );
                 this.unverified_students = response.data.students;
-                console.log(this.unverified_students);
             } catch (err) {
                 console.log(err);
             } finally {
