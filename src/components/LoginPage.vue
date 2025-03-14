@@ -62,7 +62,7 @@ export default {
                     console.log('Login successful:', response.data);
                     //Storing Token in Backend
                     localStorage.setItem('adminAuth', response.data.token)
-                    this.$router.push('/addcompany')
+                    this.$router.push('/dashboard')
                     this.loading=false
                 })
                 .catch(error => {
