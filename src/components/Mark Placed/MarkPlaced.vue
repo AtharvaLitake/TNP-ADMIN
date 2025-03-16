@@ -29,7 +29,7 @@
 
 <script>
 import axios from 'axios';
-import NavDrawer from "../BaseComponents/NavDrawer.vue";
+import NavDrawer from "../../BaseComponents/NavDrawer.vue";
 export default {
     components: {
         "nav-drawer": NavDrawer,

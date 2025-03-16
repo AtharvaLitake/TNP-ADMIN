@@ -20,8 +20,8 @@ import HelpSupport from "./components/HelpSupport.vue";
 import AdminDashboard from "./components/AdminDashboard.vue";
 import ViewVerifiedStudents from "./components/ViewVerifiedStudents.vue"
 import StudentsDetails from "./components/StudentsDetails.vue";
-import MarkPlaced from "./components/MarkPlaced.vue";
-import MarkPlacedStudents from "./components/MarkPlacedStudents.vue";
+import MarkPlaced from "./components/Mark Placed/MarkPlaced.vue";
+import MarkPlacedStudents from "./components/Mark Placed/MarkPlacedStudents.vue";
 //axios setup
 import axios from "axios";
 
