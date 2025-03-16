@@ -15,12 +15,14 @@
         to="/addnotification"></v-list-item>
       <v-list-item prepend-icon="mdi-clipboard-check" title="Listed Jobs" value="listedJobs"
         to="/listedjobs"></v-list-item>
-      <v-list-item prepend-icon="mdi-account-group-outline" title="View Registered Students" value="registeredStudents"
+      <v-list-item prepend-icon="mdi-account-plus" title="View Registered Students" value="registeredStudents"
         to="/registeredstudent"></v-list-item>
       <v-list-item prepend-icon="mdi-account-group-outline" title="View All Students" value="verifiedStudents"
         to="/students"></v-list-item>
-      <v-list-item prepend-icon="mdi-home-city" title="Mark as Placed" value="MarkPlaced"
+      <v-list-item prepend-icon="mdi-creation" title="Mark as Placed" value="MarkPlaced"
         to="/markplaced"></v-list-item>
+        <v-list-item prepend-icon="mdi-check-circle-outline" title="Mark as Shortlisted" value="MarkPlaced"
+        to="/testcompanies"></v-list-item>
       <v-list-item prepend-icon="mdi-forum" title="Help & Support" value="HelpSupport" to="/help"></v-list-item>
     </v-list>
 

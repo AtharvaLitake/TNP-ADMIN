@@ -22,9 +22,10 @@ import ViewVerifiedStudents from "./components/ViewVerifiedStudents.vue"
 import StudentsDetails from "./components/StudentsDetails.vue";
 import MarkPlaced from "./components/Mark Placed/MarkPlaced.vue";
 import MarkPlacedStudents from "./components/Mark Placed/MarkPlacedStudents.vue";
+import TestCompanies from "./components/Test Shortlist/TestCompanies.vue";
+import TestShortlist from "./components/Test Shortlist/TestShortlist.vue";
 //axios setup
 import axios from "axios";
-
 
 //Attaching header
 const token = localStorage.getItem("adminAuth");
@@ -95,6 +96,16 @@ const routes = [
     path: "/markplaced/:id",
     name: "MarkPlacedStudents",
     component: MarkPlacedStudents,
+  },
+  {
+    path: "/testcompanies",
+    name: "TestCompany",
+    component: TestCompanies,
+  },
+  {
+    path: "/testshortlist/:id",
+    name: "TestShortlist",
+    component: TestShortlist,
   },
   { path: "/", name: "SplashScreen", component: SplashScreen },
   {
