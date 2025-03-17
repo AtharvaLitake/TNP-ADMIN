@@ -1,8 +1,8 @@
 <template>
   <v-navigation-drawer expand-on-hover rail class="bg-primary">
     <v-list>
-      <v-list-item :prepend-avatar="require('@/Images/pict-logo.jpg')" subtitle="Administrator Portal"
-        title="TNP ADMIN"></v-list-item>
+      <v-list-item :prepend-avatar="require('@/Images/boy.png')" subtitle="Administrator Portal"
+        title="ADMIN"></v-list-item>
     </v-list>
 
     <v-divider></v-divider>
