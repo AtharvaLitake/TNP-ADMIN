@@ -11,7 +11,7 @@
         </p>
         <v-row align="center" justify="end" class="my-3">
             <v-col cols="auto">
-                <v-btn variant="flat" class="bg-primary" @click="markPlacedStudents" block>
+                <v-btn variant="flat" class="bg-primary" @click="markPlacedStudents" block :loading="btnloader">
                     Mark As Placed
                 </v-btn>
             </v-col>
@@ -39,6 +39,7 @@ export default {
         return {
             appliedStudentId: null,
             loading: true,
+            btnloader:false,
             applied_students: [],
             student_ids: [],
             table_headers: [
@@ -46,6 +47,7 @@ export default {
                 { title: "Registration Number", key: "pictRegistrationId" },
                 { title: "University PRN Number", key: "universityPRN" },
                 { title: "CGPA", key: "cgpa" },
+                { title: "Placed", key: "Placed" },
                 { title: "Mark as Placed", key: "actions" },
             ],
         };
@@ -54,15 +56,18 @@ export default {
         this.appliedStudentId = this.$route.params.id;
     },
     mounted() {
-        this.fetchUnverifiedStudents();
+        this.fetchShortlistedStudents();
     },
     methods: {
-        async fetchUnverifiedStudents() {
+        async fetchShortlistedStudents() {
             try {
                 const response = await axios.get(
-                    `https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs/${this.appliedStudentId}/applied-students`
+                    `https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs/${this.appliedStudentId}/shortlisted-students`
                 );
                 this.applied_students = response.data.students;
+                this.applied_students.forEach(student => {
+                    student.Placed = student.isPlaced ? "Yes" : "No";
+                });
             } catch (err) {
                 console.log(err);
             } finally {
@@ -77,7 +82,19 @@ export default {
             }
         },
         async markPlacedStudents() {
-            console.log("Selected Student IDs:", this.student_ids);
+            this.btnloader=true
+            let id = this.appliedStudentId
+            try {
+                await axios.post(`https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs/${id}/mark-placed`, {
+                    studentIds: this.student_ids
+                });
+                this.fetchShortlistedStudents();
+                this.student_ids=[]
+            } catch (error) {
+                console.error("Error marking students as placed:", error);
+            }finally{
+                this.btnloader=false
+            }
         },
     },
 };

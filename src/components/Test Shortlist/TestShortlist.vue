@@ -13,7 +13,7 @@
         </p>
         <v-row align="center" justify="end" class="my-3">
             <v-col cols="auto">
-                <v-btn variant="flat" class="bg-primary" @click="markShortlisted" block>
+                <v-btn variant="flat" class="bg-primary" @click="markShortlisted" block :loading="btnloader">
                     Mark As Shortlisted
                 </v-btn>
             </v-col>
@@ -41,6 +41,7 @@ export default {
         return {
             appliedStudentId: null,
             loading: true,
+            btnloader:false,
             applied_students: [],
             student_ids: [],
             table_headers: [
@@ -84,6 +85,7 @@ export default {
             }
         },
         async markShortlisted() {
+            this.btnloader=true
             let id = this.appliedStudentId
             try {
                 await axios.post(`https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs/${id}/mark-shortlisted`, {
@@ -93,6 +95,8 @@ export default {
                 this.student_ids=[]
             } catch (error) {
                 console.error("Error marking students as placed:", error);
+            }finally{
+                this.btnloader=false
             }
         }
 
