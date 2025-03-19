@@ -43,7 +43,7 @@
                   </template>
                   <template v-else>
                     <span class="text-justify" style="color: rgba(8, 30, 127, 0.6); font-size: 18px; font-weight: 500;">
-                      {{ studentDetails[key] || "N/A" }}
+                      {{ formatValue(key, studentDetails[key]) }}<!--- {{ studentDetails[key] || "N/A" }}-->
                     </span>
                   </template>
                 </v-col>
@@ -171,6 +171,13 @@
       getCurrentPageKeys() {
         return this.studentKeys[this.currentPage - 1] || [];
       },
+      formatValue(key, value) {
+    if (key === "dateOfBirth" && value) {
+      const date = new Date(value);
+      return date.toLocaleDateString("en-GB"); 
+    }
+    return value || "N/A";
+  },
       formatKey(key) {
         return key
           .replace(/_/g, " ")
