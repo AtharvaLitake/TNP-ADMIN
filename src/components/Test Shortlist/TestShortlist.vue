@@ -6,12 +6,14 @@
             Mark Students as Shortlisted
         </h1>
         <p class="text-justify text-subtitle-1" style="color: rgba(8, 30, 127, 0.6)">
-            This page displays a list of students who have applied to the company. The admin can mark students as Shortlisted if they have cracked the OA,
-            by selecting the corresponding checkboxes. An Automatic mail will get triggered to all shortlisting students.
+            This page displays a list of students who have applied to the company. The admin can mark students as
+            Shortlisted if they have cracked the OA,
+            by selecting the corresponding checkboxes. An Automatic mail will get triggered to all shortlisting
+            students.
         </p>
         <v-row align="center" justify="end" class="my-3">
             <v-col cols="auto">
-                <v-btn variant="flat" class="bg-primary" @click="markPlacedStudents" block>
+                <v-btn variant="flat" class="bg-primary" @click="markShortlisted" block :loading="btnloader">
                     Mark As Shortlisted
                 </v-btn>
             </v-col>
@@ -39,6 +41,7 @@ export default {
         return {
             appliedStudentId: null,
             loading: true,
+            btnloader:false,
             applied_students: [],
             student_ids: [],
             table_headers: [
@@ -46,7 +49,8 @@ export default {
                 { title: "Registration Number", key: "pictRegistrationId" },
                 { title: "University PRN Number", key: "universityPRN" },
                 { title: "CGPA", key: "cgpa" },
-                { title: "Mark as Placed", key: "actions" },
+                { title: "Shortlisted", key: "Shortlisted" },
+                { title: "Shortlist Student", key: "actions" },
             ],
         };
     },
@@ -54,15 +58,19 @@ export default {
         this.appliedStudentId = this.$route.params.id;
     },
     mounted() {
-        this.fetchUnverifiedStudents();
+        this.fetchAppliedStudents();
     },
     methods: {
-        async fetchUnverifiedStudents() {
+        async fetchAppliedStudents() {
             try {
                 const response = await axios.get(
                     `https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs/${this.appliedStudentId}/applied-students`
                 );
                 this.applied_students = response.data.students;
+                this.applied_students.forEach(student => {
+                    student.Shortlisted = student.isShortlisted ? "Yes" : "No";
+                });
+
             } catch (err) {
                 console.log(err);
             } finally {
@@ -76,9 +84,22 @@ export default {
                 this.student_ids = this.student_ids.filter(id => id !== studentId);
             }
         },
-        async markPlacedStudents() {
-            console.log("Selected Student IDs:", this.student_ids);
-        },
+        async markShortlisted() {
+            this.btnloader=true
+            let id = this.appliedStudentId
+            try {
+                await axios.post(`https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs/${id}/mark-shortlisted`, {
+                    studentIds: this.student_ids
+                });
+                this.fetchAppliedStudents();
+                this.student_ids=[]
+            } catch (error) {
+                console.error("Error marking students as placed:", error);
+            }finally{
+                this.btnloader=false
+            }
+        }
+
     },
 };
 </script>
