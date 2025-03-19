@@ -52,7 +52,8 @@ export default {
         this.loader = false;
         this.$router.push("/login")
       } catch (error) {
-        console.error("Error uploading:", error);
+        localStorage.removeItem("adminAuth");
+        this.$router.push("/login")
       }
     }
   }
