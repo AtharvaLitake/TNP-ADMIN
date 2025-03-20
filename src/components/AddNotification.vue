@@ -20,6 +20,7 @@
         </v-col>
       </v-row>
     </v-form>
+    <render-notices></render-notices>
   </v-container>
 </template>
 
@@ -28,9 +29,11 @@ import axios from "axios";
 import NavDrawer from "../BaseComponents/NavDrawer.vue";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+import RenderNotices from "./Notices/RenderNotices.vue";
 export default {
   components: {
     "nav-drawer": NavDrawer,
+    "render-notices":RenderNotices,
   },
   data() {
     return {

@@ -47,7 +47,7 @@ export default {
             this.loader = true;
             try {
                 const response = await axios.get(
-                    "https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs"
+                    "https://tnp-portal-backend-tpx5.onrender.com/api/v1/jobs/inactive/admin"
                 );
                 this.listedjobs = response.data.jobs;
                 console.log(this.listedjobs)
