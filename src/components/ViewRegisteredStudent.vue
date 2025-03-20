@@ -3,7 +3,7 @@
     <nav-drawer></nav-drawer>
     <v-container class="px-15">
         <h1 class="text-h5 font-weight-bold text-primary mb-3">Check Student Details</h1>
-        <p class="text-justify text-subtitle-1" style="color: rgba(8, 30, 127, 0.6)">
+        <p class="text-justify text-h6" style="color: rgba(8, 30, 127, 0.6)">
             Through this page, you can send notices about placement opportunities to
             all individuals, ensuring they stay informed about upcoming recruitment
             drives and job openings.

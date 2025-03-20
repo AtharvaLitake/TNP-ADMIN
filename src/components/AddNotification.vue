@@ -26,6 +26,8 @@
 <script>
 import axios from "axios";
 import NavDrawer from "../BaseComponents/NavDrawer.vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 export default {
   components: {
     "nav-drawer": NavDrawer,
@@ -40,7 +42,17 @@ export default {
   methods: {
     async addnotice() {
       if (!this.notification_title || !this.notification_body) {
-        alert("Please fill in all fields");
+        toast.error("Please fill in all fields.", {
+            position: "top-center",
+            autoClose: 4000,
+            style: {
+              width: "500px",
+              height: "200px",
+              fontSize: "16px",
+              padding: "10px",
+              textAlign: "center",
+            },
+          });
         return;
       }
       this.loading = true;
@@ -49,10 +61,32 @@ export default {
           title: this.notification_title,
           description: this.notification_body,
         });
-        alert("Notice sent successfully!");
+        /*alert("Notice sent successfully!");*/
+        toast.success("Notice sent successfully!", {
+            position: "top-center",
+            autoClose: 4000,
+            style: {
+              width: "500px",
+              height: "200px",
+              fontSize: "16px",
+              padding: "10px",
+              textAlign: "center",
+            },
+          });
         this.notification_title = "";
         this.notification_body = "";
       } catch (error) {
+        toast.error("Error in sending notice. Please try again later.", {
+            position: "top-center",
+            autoClose: 4000,
+            style: {
+              width: "500px",
+              height: "200px",
+              fontSize: "16px",
+              padding: "10px",
+              textAlign: "center",
+            },
+          });
         console.error("Error sending notice:", error);
       } finally {
         this.loading = false;

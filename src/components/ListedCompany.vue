@@ -29,6 +29,8 @@
 <script>
 import axios from 'axios';
 import NavDrawer from "../BaseComponents/NavDrawer.vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 export default {
     components: {
         "nav-drawer": NavDrawer,
@@ -51,6 +53,17 @@ export default {
                 this.listedjobs = response.data.jobs;
                 console.log(this.listedjobs)
             } catch (err) {
+                toast.error("Error in loading jobs. Please try again later.", {
+            position: "top-center",
+            autoClose: 4000,
+            style: {
+              width: "500px",
+              height: "200px",
+              fontSize: "16px",
+              padding: "10px",
+              textAlign: "center",
+            },
+          });
                 console.log(err);
             } finally {
                 this.loader = false

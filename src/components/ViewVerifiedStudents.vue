@@ -2,7 +2,7 @@
     <nav-drawer></nav-drawer>
     <v-container class="px-15">
         <h1 class="text-h5 font-weight-bold text-primary mb-3">View All Students</h1>
-        <p class="text-justify text-subtitle-1" style="color: rgba(8, 30, 127, 0.6)">
+        <p class="text-justify text-h6" style="color: rgba(8, 30, 127, 0.6)">
             Through this page, you can see all the students registered on this portal for the placement opportunities.
             Click on View Details to check each and every student details.
         </p>

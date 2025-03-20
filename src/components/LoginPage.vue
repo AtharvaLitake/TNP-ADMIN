@@ -33,7 +33,7 @@
                       variant="underlined"
                       color="primary"
                       style="color: rgba(8, 30, 127)"
-                      :rules="[(v) => !!v || 'Please enter admin']"
+                      :rules="[(v) => !!v || 'Please enter Mail ID']"
                     ></v-text-field>
 
                     <!-- Password -->
@@ -48,6 +48,7 @@
                       color="primary"
                       style="color: rgba(8, 30, 127)"
                       @click:append-inner="show2 = !show2"
+                      :rules="[(v) => !!v || 'Please enter password']"
                     ></v-text-field>
 
                     <v-btn
@@ -101,7 +102,7 @@ export default {
           this.loading = false;
         })
         .catch((error) => {
-          toast.error("Please enter valid Registration ID and Password", {
+          toast.error("Please enter valid Mail ID and Password", {
             position: "top-center",
             autoClose: 4000,
             style: {
