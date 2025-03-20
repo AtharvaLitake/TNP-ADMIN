@@ -1,6 +1,6 @@
 <template>
 <h1 class="text-h5 font-weight-bold text-primary text-center mb-1">Department Wise Statistics</h1>
-    <div id="lineGraph" style="height: 400px; width:100%"></div>
+    <div id="lineGraph" style="height: 350px; width:100%"></div>
 </template>
 <script>
 import Plotly from "plotly.js-dist-min";
@@ -20,7 +20,9 @@ export default {
                 x: ['CE', 'IT', 'ENTC'],
                 y: [225, 140, 90],
                 type: "bar",
-                marker: { color: "#081e7f" },
+                marker: { 
+            color: ["#ffcc00","#081e7f",  "#ffcc00"] 
+        },
                 hovertemplate: "Semester %{x}<br>SGPA: %{y}<extra></extra>"
             }
             this.layout = {

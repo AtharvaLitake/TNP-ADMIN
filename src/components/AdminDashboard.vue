@@ -69,4 +69,7 @@ export default {
   .text-blue {
     color: #081E7F !important;
   }
+  .yellow{
+    color: #ffcc00 !important
+  }
   </style>

@@ -11,64 +11,82 @@
     ></v-progress-circular>
   </div>
   <v-container v-else>
-  <div class="mx-auto my-2 pa-2 ml-15" max-width="900">
-    <h1 class="text-h5 font-weight-bold text-primary mb-3 ml-3">
-      Student Details
-    </h1>
-    <v-divider class="mb-4" color="primary" :thickness="3"></v-divider>
+    <div class="mx-auto my-2 pa-2 ml-15" max-width="900">
+      <h1 class="text-h5 font-weight-bold text-primary mb-3">
+        Student Details
+      </h1>
+      <p class="text-justify text-h6 mb-2" style="color: rgba(8, 30, 127, 0.6)">
+        The details having checked marks are previously verified through college
+        ERP system.
+      </p>
+      <v-divider class="mb-4" color="primary" :thickness="3"></v-divider>
 
-    <!-- Display based on current page -->
-    <v-container class="pa-0 ml-3">
-      <v-row>
-        <template v-for="(key) in getCurrentPageKeys()" :key="key">
-          <v-col cols="6">
-            <v-row dense>
-              <!-- Label Column (40%) -->
-              <v-col cols="5" class="font-weight-bold text-primary" style="font-size: 18px;">
-                {{ formatKey(key) }}:
-              </v-col>
+      <!-- Display based on current page -->
+      <v-container class="pa-0 ml-3">
+        <v-row>
+          <template v-for="key in getCurrentPageKeys()" :key="key">
+            <v-col cols="6">
+              <v-row dense align="center">
+              
+                <v-col cols="1" class="d-flex align-center justify-end">
+                  <v-icon v-if="shouldShowTickIcon(key)" color="#ffcc00">
+                    mdi-check-circle
+                  </v-icon>
+                </v-col>
 
-              <!-- Value Column (60%) -->
-              <v-col cols="7">
-                <template v-if="isPdfUrl(key)">
-                  <v-btn
-                    color="primary"
-                    :href="studentDetails[key]"
-                    target="_blank"
-                    download
-                    style="min-width: 180px; text-align: center;"
+                <!-- Label Column  -->
+                <v-col cols="5" class="d-flex align-center">
+                  <span
+                    class="font-weight-bold text-primary"
+                    style="font-size: 18px"
                   >
-                    {{ getButtonLabel(key) }}
-                  </v-btn>
-                </template>
-                <template v-else>
-                  <span class="text-justify" style="color: rgba(8, 30, 127, 0.6); font-size: 18px; font-weight: 500;">
-                    {{ formatValue(key, studentDetails[key]) }}
+                    {{ formatKey(key) }}:
                   </span>
-                </template>
-              </v-col>
-            </v-row>
-          </v-col>
-        </template>
-      </v-row>
-    </v-container>
+                </v-col>
 
-    <!-- Validate Button on Page 2 -->
-    <v-row v-if="currentPage === 2" class="d-flex justify-center pa-6 mt-8">
-      <v-col cols="3">
-        <v-btn class="bg-primary" size="x-large" type="submit" block :loading="btnloading" @click="validateStudent(studentId)">
-          Validate
-        </v-btn>
-      </v-col>
-    </v-row>
+                <!-- Value Column -->
+                <v-col cols="6">
+                  <template v-if="isPdfUrl(key)">
+                    <v-btn
+                      color="primary"
+                      :href="studentDetails[key]"
+                      target="_blank"
+                      download
+                      style="min-width: 180px; text-align: center"
+                    >
+                      {{ getButtonLabel(key) }}
+                    </v-btn>
+                  </template>
+                  <template v-else>
+                    <span
+                      class="text-justify"
+                      style="
+                        color: rgba(8, 30, 127, 0.6);
+                        font-size: 18px;
+                        font-weight: 500;
+                      "
+                    >
+                      {{ formatValue(key, studentDetails[key]) }}
+                    </span>
+                  </template>
+                </v-col>
+              </v-row>
+            </v-col>
+          </template>
+        </v-row>
+      </v-container>
 
-    <!-- Pagination -->
-    <v-pagination v-model="currentPage" :length="2" color="primary" class="mt-4"></v-pagination>
-  </div>
-</v-container>
-
+      <!-- Pagination -->
+      <v-pagination
+        v-model="currentPage"
+        :length="2"
+        color="primary"
+        class="mt-4"
+      ></v-pagination>
+    </div>
+  </v-container>
 </template>
-
+  
 <script>
 import axios from "axios";
 import NavDrawer from "../BaseComponents/NavDrawer.vue";
@@ -81,10 +99,45 @@ export default {
       studentId: null,
       studentDetails: {},
       loading: true,
-      btnloading:false,
+      btnloading: false,
       error: null,
       currentPage: 1,
-
+      tickFields: [
+        "fullName",
+        "dateOfBirth",
+        "gender",
+        "city",
+        "state",
+        "permanentAddress",
+        "branch",
+        "universityPRN",
+        "pictRegistrationId",
+        "percentage10th",
+        "board10th",
+        "passingYear10th",
+        "percentage12th",
+        "board12th",
+        "passingYear12th",
+        "percentageDiploma",
+        "passingYearDiploma",
+        "aadharNumber",
+        "panNumber",
+        "passportNumber",
+        "citizenship",
+        "noOfGapYearsAfter10th",
+        "reasonOfGapAfter10th",
+        "after10thAppearedFor",
+        "passingYear12th",
+        "noOfGapYearsAfter12th",
+        "reasonOfGapAfter12th",
+        "percentageDiploma",
+        "universityOfDiploma",
+        "noOfGapYearsAfterDiploma",
+        "reasonOfGapAfterDiploma",
+        "percentileCet",
+        "percentileJee",
+        "collegeStartedYear",
+      ],
       studentKeys: [
         [
           "fullName",
@@ -168,18 +221,6 @@ export default {
         this.loading = false;
       }
     },
-    async validateStudent(studentId){
-      this.btnloading=true;
-      try {
-        await axios.post(
-          `https://tnp-portal-backend-tpx5.onrender.com/api/v1/students/${studentId}/verify`
-        );
-        this.$router.push("/registeredstudent")
-      } catch (err) {
-        this.error = "Failed to Validate student details";
-        console.error(err);
-      }
-    },
     isPdfUrl(key) {
       return ["documentsURL", "amcatResultURL", "beReceiptURL"].includes(key);
     },
@@ -195,22 +236,28 @@ export default {
       return this.studentKeys[this.currentPage - 1] || [];
     },
     formatValue(key, value) {
-    if (key === "dateOfBirth" && value) {
-      const date = new Date(value);
-      return date.toLocaleDateString("en-GB"); 
-    }
-    return value || "N/A";
-  },
+      if (key === "dateOfBirth" && value) {
+        const date = new Date(value);
+        return date.toLocaleDateString("en-GB");
+      }
+      return value || "N/A";
+    },
     formatKey(key) {
       return key
         .replace(/_/g, " ")
         .replace(/([a-z])([A-Z])/g, "$1 $2")
         .replace(/\b\w/g, (char) => char.toUpperCase());
     },
+    shouldShowTickIcon(key) {
+      console.log(
+        `Checking Tick for: ${key}, Found: ${this.tickFields.includes(key)}`
+      );
+      return this.tickFields.includes(key);
+    },
   },
 };
 </script>
-
+  
 <style scoped>
 .custom_loader {
   height: 90vh;

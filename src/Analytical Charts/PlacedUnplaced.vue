@@ -1,6 +1,6 @@
 <template>
     <h1 class="text-h5 font-weight-bold text-primary text-center">Placement Distribution Statistics</h1>
-    <div id="pieChart" style="height: 400px; width: 100%"></div>
+    <div id="pieChart" style="height: 350px; width: 100%"></div>
 </template>
 
 <script>
@@ -23,7 +23,7 @@ export default {
                 values: [425, 225],
                 type: "pie",
                 marker: {
-                    colors: ["#081e7f", "rgba(8, 30, 127, 0.6)"]
+                    colors: ["#081e7f", "#ffcc00"]
                 },
                 hovertemplate: "%{label}: %{value} students<extra></extra>",
                 showlegend: false,
