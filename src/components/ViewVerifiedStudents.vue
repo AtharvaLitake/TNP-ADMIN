@@ -34,6 +34,7 @@ export default {
                 { title: 'Student Name', key: 'fullName' },
                 { title: 'Registration Number', key: 'pictRegistrationId' },
                 { title: 'University PRN Number', key: 'universityPRN' },
+                { title: 'Placed', key: 'isPlaced' },
                 { title: 'View Verified Student Details', key: 'actions' },
             ],
         };
@@ -58,6 +59,9 @@ export default {
                     "https://tnp-portal-backend-tpx5.onrender.com/api/v1/students/verified"
                 );
                 this.unverified_students = response.data.students;
+                this.unverified_students.forEach(student => {
+                    student.isPlaced = student.isPlaced ? "Yes" : "No";
+                });
             } catch (err) {
                 console.log(err);
             } finally {
