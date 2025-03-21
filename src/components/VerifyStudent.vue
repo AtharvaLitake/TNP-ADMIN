@@ -75,7 +75,13 @@
           </template>
         </v-row>
       </v-container>
-
+      <v-row v-if="currentPage === 2" class="d-flex justify-center pa-6 mt-8">
+       <v-col cols="3">
+         <v-btn class="bg-primary" size="x-large" type="submit" block :loading="btnloading" @click="validateStudent(studentId)">
+           Validate
+         </v-btn>
+       </v-col>
+     </v-row>
       <!-- Pagination -->
       <v-pagination
         v-model="currentPage"
@@ -221,6 +227,18 @@ export default {
         this.loading = false;
       }
     },
+    async validateStudent(studentId){
+       this.btnloading=true;
+       try {
+         await axios.post(
+           `https://tnp-portal-backend-tpx5.onrender.com/api/v1/students/${studentId}/verify`
+         );
+         this.$router.push("/registeredstudent")
+       } catch (err) {
+         this.error = "Failed to Validate student details";
+         console.error(err);
+       }
+     },
     isPdfUrl(key) {
       return ["documentsURL", "amcatResultURL", "beReceiptURL"].includes(key);
     },
